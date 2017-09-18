@@ -42,7 +42,7 @@ problem2.exe: problem2.cpp
 	@ echo Building $@...
 	@ $(CXX) -o $@ $< $(LDFLAGS) $(LDFLAGS)
 
-problem3.exe: problem3.cpp
+problem3.exe: problem3.o
 	@ echo Building $@...
 	@ $(CXX) -o $@ $< $(LDFLAGS) $(LDFLAGS)
 .PHONY: clean
