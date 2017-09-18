@@ -1,0 +1,6 @@
+8
+0x7fffffffe2b8
+0x7fffffffe2b7
+4196224
+10
+Arr[0] is firstly unassigned. After p[0] = d, it is blinding to d. So it has a value of *p =10

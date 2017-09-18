@@ -1,6 +1,6 @@
 # Warnings
 WFLAGS	:= -Wall -Wextra -Wsign-conversion -Wsign-compare
-
+EXEC 	:= problem1.exe problem2.exe problem3.exe
 # Optimization and architecture
 OPT		:= -O3
 ARCH   	:= -march=native
@@ -19,9 +19,11 @@ LDFLAGS :=
 debug : OPT  := -O0 -g -fno-omit-frame-pointer -fsanitize=address
 debug : LDFLAGS := -fsanitize=address
 debug : ARCH :=
-debug : $(EXEC)
+debug : $(EXEC) 
 
 all : Makefile $(EXEC)
+#problem1 : problem1.cpp
+#		g++ -o3 problem1.c -o problem1.exe
 
 %.o : %.c Makefile
 	@ echo Compiling $<...
@@ -32,7 +34,17 @@ all : Makefile $(EXEC)
 	$(CXX) $(CXXSTD) $(WFLAGS) $(OPT) $(ARCH) $(CXXFLAGS) -c $< -o $@
 
 # TODO: add targets for building executables
+problem1.exe: problem1.cpp
+	@ echo Building $@...
+	@ $(CXX) -o $@ $< $(LDFLAGS) $(LDFLAGS)
 
+problem2.exe: problem2.cpp
+	@ echo Building $@...
+	@ $(CXX) -o $@ $< $(LDFLAGS) $(LDFLAGS)
+
+problem3.exe: problem3.cpp
+	@ echo Building $@...
+	@ $(CXX) -o $@ $< $(LDFLAGS) $(LDFLAGS)
 .PHONY: clean
 clean:
 	@ rm -f $(EXEC) $(OBJS)
