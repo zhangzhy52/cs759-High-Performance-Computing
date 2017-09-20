@@ -1,6 +1,6 @@
 # Warnings
 WFLAGS	:= -Wall -Wextra -Wsign-conversion -Wsign-compare
-
+EXEC 	:= problem1a.exe problem1b.exe problem1c.exe problem2a.exe problem2b.exe problem3a.exe problem3b.exe problem3c.exe
 # Optimization and architecture
 OPT		:= -O3
 ARCH   	:= -march=native
@@ -32,6 +32,34 @@ all : Makefile $(EXEC)
 	$(CXX) $(CXXSTD) $(WFLAGS) $(OPT) $(ARCH) $(CXXFLAGS) -c $< -o $@
 
 # TODO: add targets for building executables
+problem1a.exe: problem1a.cpp
+	@ echo Building $@...
+	@ $(CXX) $(CXXSTD) -o $@ $< $(LDFLAGS) $(LDFLAGS)
+
+problem1b.exe: problem1b.cpp
+	@ echo Building $@...
+	@ $(CXX) $(CXXSTD) -o $@ $< $(LDFLAGS) $(LDFLAGS)
+problem1c.exe: problem1c.cpp
+	@ echo Building $@...
+	@ $(CXX) $(CXXSTD) -o $@ $< $(LDFLAGS) $(LDFLAGS)
+
+problem2a.exe: problem2a.cpp
+	@ echo Building $@...
+	@ $(CXX) $(CXXSTD) -o $@ $< $(LDFLAGS) $(LDFLAGS)
+problem2b.exe: problem2b.cpp
+	@ echo Building $@...
+	@ $(CXX) $(CXXSTD) -o $@ $< $(LDFLAGS) $(LDFLAGS)
+
+problem3a.exe: problem3a.cpp
+	@ echo Building $@...
+	@ $(CXX) $(CXXSTD) -o $@ $< $(LDFLAGS) $(LDFLAGS)
+problem3b.exe: problem3b.cpp
+	@ echo Building $@...
+	@ $(CXX) $(CXXSTD) -o $@ $< $(LDFLAGS) $(LDFLAGS)
+problem3c.exe: problem3c.cpp
+	@ echo Building $@...
+	@ $(CXX) $(CXXSTD) -o $@ $< $(LDFLAGS) $(LDFLAGS)	
+
 
 .PHONY: clean
 clean:
