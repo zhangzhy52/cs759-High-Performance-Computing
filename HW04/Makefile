@@ -7,11 +7,17 @@ ARCH   	:= -march=native
 
 # Language standard
 CCSTD	:= -std=c99
-CXXSTD	:= -std=c++11
+CXXSTD	:= -std=c++14
+
+CXXFLAGS	:= 
 
 # Linker options
 LDOPT 	:= $(OPT)
 LDFLAGS := 
+
+# Names of executables to create
+EXEC	:= problem1 problem2
+
 
 .DEFAULT_GOAL := all
 
@@ -32,6 +38,24 @@ all : Makefile $(EXEC)
 	$(CXX) $(CXXSTD) $(WFLAGS) $(OPT) $(ARCH) $(CXXFLAGS) -c $< -o $@
 
 # TODO: add targets for building executables
+
+problem1.o : problem1.cpp 
+	@ echo Compiling $<...
+	$(CXX) $(CXXSTD) $(WFLAGS) $(OPT) $(ARCH) $(CXXFLAGS) -c $< -o $@ -fopenmp
+
+problem1: problem1.o
+	@ echo Building $@...
+	@ $(CXX) -o $@ $< $(LDFLAGS) -fopenmp
+
+
+problem2.o : problem2.cpp 
+	@ echo Compiling $<...
+	$(CXX) $(CXXSTD) $(WFLAGS) $(OPT) $(ARCH) $(CXXFLAGS) -c $< -o $@ -fopenmp
+problem2 : problem2.o
+	@ echo Building $@...
+	@ $(CXX) -o $@ $< $(LDFLAGS) -fopenmp
+
+
 
 .PHONY: clean
 clean:
