@@ -35,6 +35,23 @@ $(EXEC) : % : %.o
 	@ echo Building $@...
 	@ $(CXX) -o $@ $< $(LDFLAGS)
 
+problem1.o : problem1.cpp 
+	@ echo Compiling $<...
+	$(CXX) $(CXXSTD) $(WFLAGS) $(OPT) $(ARCH) $(CXXFLAGS) -c $< -o $@ -fopenmp
+
+problem1: problem1.o
+	@ echo Building $@...
+	@ $(CXX) -o $@ $< $(LDFLAGS) $(OPT) -fopenmp
+
+
+problem2.o : problem2.cpp 
+	@ echo Compiling $<...
+	$(CXX) $(CXXSTD) $(WFLAGS) $(OPT) $(ARCH) $(CXXFLAGS) -c $< -o $@ -fopenmp
+problem2 : problem2.o
+	@ echo Building $@...
+	@ $(CXX) -o $@ $< $(LDFLAGS) $(OPT) -fopenmp
+
+
 .PHONY: clean
 clean:
 	@ rm -f *.o $(EXEC) *.in

@@ -5,7 +5,6 @@
 #SBATCH --cpus-per-task=40
 #SBATCH --error=/srv/home/zzhang546/hw05/problem2.err
 #SBATCH --output=/srv/home/zzhang546/hw05/problem2.out
-
 for i in $(seq 1 40)
 do
 	./problem2 $i

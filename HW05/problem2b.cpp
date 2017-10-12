@@ -121,8 +121,9 @@ int main(int argc, char *argv[]) {
 		 * 	that were not covered by the vectors
 		 */
 		double extra_sum {};
-		for (auto i = num_iters * vec_inc * vec_width + 4; i <= N - 4; i++) {
+		for (auto i = num_iters * vec_inc * vec_width + 4; i <= N - 4; i+=2) {
 			extra_sum += f(h * i);
+			extra_sum += f(h * (i +1));
 		}
 
 		integral_value = h / 48.0 * (horizontal_sum(left) + horizontal_sum(right)) + horizontal_sum(_mm256_mul_pd(_mm256_set1_pd(h), sum)) + extra_sum * h;
@@ -132,9 +133,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	const auto min_time = *std::min_element(timings.begin(), timings.end());
-	std::cout << num_threads << "\n " ;
-	std::cout << min_time << "\n" ;
-	std::cout << std::setprecision(15) << integral_value << "\n";
+	std::cout << num_threads << " " << min_time << " "<< std::setprecision(15) << integral_value << "\n";
 
 	// Calculate the percent error
 	auto perror = [](auto x) {return 100.0 * std::fabs(x-32.121040688226245) / 32.121040688226245;};
