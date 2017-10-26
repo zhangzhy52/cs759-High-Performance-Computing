@@ -184,7 +184,7 @@ int main(int argc, char** argv) {
 	bool res = CompareResults(reference.elements, P.elements, 
 			size_elements, 0.0001f,&norm);
 	if(res==0)printf("Test failed\n"); // This should not be printed in the correct implementation
-	printf("%f\n%f\n%f\n%f\n",norm,msecTotal,inclusiveTime, exclusiveTime);	
+	printf("%f\n%f\n%f\n%f\n",sqrt(norm),msecTotal,inclusiveTime, exclusiveTime);	
 
 
 	// Free host matrices
@@ -213,15 +213,28 @@ void MatrixAddOnDevice(const Matrix M, const float alpha, const Matrix N, const 
 	cudaEventRecord(startEvent_inc,0); // starting timing for inclusive
 	//Allocate device matrices
 
+	Matrix dM = AllocateDeviceMatrix(M);
+	Matrix dN = AllocateDeviceMatrix(N);
+	Matrix dP = AllocateDeviceMatrix(M);
+
 	// copy matrices to device 
+	CopyToDeviceMatrix(dM, M);
+	CopyToDeviceMatrix(dN, N);
+
 	cudaEventRecord(startEvent_exc,0); // staring timing for exclusive
 
+	int thread_per_block = 32;
+	int block_per_grid = MATRIX_SIZE * MATRIX_SIZE / thread_per_block;
+	
 	//launch kernel
+	MatrixAddKernel <<< block_per_grid , thread_per_block >>> (dM.elements, alpha, dN.elements, beta, dP.elements);
+
 	cudaEventRecord(stopEvent_exc,0);  // ending timing for exclusive
 	cudaEventSynchronize(stopEvent_exc);   
 	cudaEventElapsedTime(&elapsedTime_exc, startEvent_exc, stopEvent_exc);
-	// Read P from the device
 
+	// Read P from the device
+	CopyFromDeviceMatrix(P, dP);
 
 	cudaEventRecord(stopEvent_inc,0);  //ending timing for inclusive
 	cudaEventSynchronize(stopEvent_inc);   

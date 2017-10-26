@@ -52,6 +52,8 @@
 __global__ void MatrixAddKernel(const float* Melems, const float alpha, const float* Nelems, const float beta, float* Pelems)
 {
    // ADD YOUR CODE HERE
+	int index = threadIdx.x + blockIdx.x * blockDim.x;
+	Pelems[index] = Melems[index] + Nelems[index];
 }
 
 #endif // #ifndef _MATRIXADD_KERNEL_H_
