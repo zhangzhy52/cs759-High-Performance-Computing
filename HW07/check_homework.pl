@@ -143,4 +143,8 @@ if (!try_build($dir, "problem2")) {
 
 my $points = 14;
 my $score = int(0.5 + 100.0 * $grade/$points);
+<<<<<<< HEAD
 printf("grade = %d/%d (%d%%)\n", $grade, $points, $score);
+=======
+printf("grade = %d/%d (%d%%)\n", $grade, $points, $score);
+>>>>>>> 84e56f4bb6f1ed0b25ff53cee452ad681e371b51
