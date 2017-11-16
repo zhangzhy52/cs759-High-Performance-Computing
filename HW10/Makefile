@@ -21,12 +21,16 @@ debug : LDFLAGS := -fsanitize=address
 debug : ARCH :=
 debug : $(EXEC)
 
-all : problem1
+all : problem1 problem3
 
 
 
 problem1: problem1.cu 
 	module load cuda;nvcc -o problem1 $(OPT) problem1.cu -ccbin $(BIN)
+problem2: problem2.cu vector_reduction_gold.cpp
+	module load cuda;nvcc -o problem1 $(OPT) problem2.cu vector_reduction_gold.cpp -ccbin $(BIN)
+problem3:problem3.cu 
+	module load cuda;nvcc -o problem1 $(OPT) problem3.cu -ccbin $(BIN)
 
 
 
