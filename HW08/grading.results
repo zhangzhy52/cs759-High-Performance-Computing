@@ -1,0 +1,14 @@
+zhangzhy52: problem1 built successfully +1
+zhangzhy52: Problem 1 PASSED +4
+zhangzhy52: problem2 built successfully +1
+zhangzhy52: Problem 2 with N=8 PASSED +4
+zhangzhy52: Problem 2 with N=16 PASSED +4
+zhangzhy52: Problem 2 with N=32 PASSED +4
+zhangzhy52: found problem2.pdf, Problem 2 PASSED +1
+zhangzhy52: problem3 built successfully +1
+zhangzhy52: Problem 3 with configuration '128 256 256 8' FAILED. Error(6288.74, 0.000000) > 10% +3
+zhangzhy52: Problem 3 with configuration '128 256 256 16' FAILED. Error(6288.74, 0.000000) > 10% +3
+zhangzhy52: Problem 3 with configuration '128 256 256 32' FAILED. Error(6288.74, 0.000000) > 10% +3
+zhangzhy52: Problem 3 FAILED: problem3.pdf not found
+zhangzhy52: Extra credit = (10/14)
+zhangzhy52: grade = 19/19 (135%)
