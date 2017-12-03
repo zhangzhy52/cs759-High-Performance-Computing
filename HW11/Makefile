@@ -21,18 +21,30 @@ debug : LDFLAGS := -fsanitize=address
 debug : ARCH :=
 debug : $(EXEC)
 
-all : Makefile $(EXEC)
+# all : problem1 ref_scan
+# all : problem2 ref_reduction
 
-%.o : %.c Makefile
-	@ echo Compiling $<...
-	$(CC) $(CCSTD) $(WFLAGS) $(OPT) $(ARCH) $(CFLAGS) -c $< -o $@
+# all : problem1 ref_scan problem2  ref_reduction
+# EXEC=problem1 ref_scan problem2 ref_reduction 
 
-%.o : %.cpp Makefile
-	@ echo Compiling $<...
-	$(CXX) $(CXXSTD) $(WFLAGS) $(OPT) $(ARCH) $(CXXFLAGS) -c $< -o $@
+# all : problem1 ref_scan problem2  ref_reduction problem3
+# EXEC=problem1 ref_scan problem2 ref_reduction problem3
 
-# TODO: add targets for building executables
+all : problem1 problem2 problem3
+EXEC=problem1 problem2 problem3
+
+problem1: problem1.cu
+	module load cuda; nvcc -o problem1 $(OPT) problem1.cu
+ref_scan: ref_scan.cu
+	module load cuda; nvcc -o ref_scan $(OPT) ref_scan.cu
+problem2: problem2.cu
+	module load cuda; nvcc -o problem2 $(OPT) problem2.cu
+ref_reduction: ref_reduction.cu
+	module load cuda; nvcc -o ref_reduction $(OPT) ref_reduction.cu
+problem3: problem3.cu
+	module load cuda; nvcc -o problem3 $(OPT) problem3.cu
+
 
 .PHONY: clean
 clean:
-	@ rm -f $(EXEC) $(OBJS)
+	@ rm -f $(EXEC) 
